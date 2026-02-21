@@ -1,0 +1,56 @@
+# MARL-LLM-PM Default Configuration
+
+environment:
+  assets:
+    - type: equity
+      tickers: ["SPY", "QQQ", "IWM"]
+    - type: bond
+      tickers: ["TLT", "IEF", "SHY"]
+    - type: alternative
+      tickers: ["GLD", "VNQ"]
+  initial_cash: 1_000_000
+  transaction_cost: 0.001
+  lookback_window: 60  # days
+
+agents:
+  n_agents: 3
+  algorithm: PPO
+  learning_rate: 3.0e-4
+  gamma: 0.99
+  n_steps: 2048
+  batch_size: 64
+  n_epochs: 10
+  policy: MlpPolicy
+
+llm:
+  model: claude-opus-4-6
+  sentiment_update_freq: daily   # how often to query LLM for sentiment
+  max_tokens: 1024
+  temperature: 0.3
+  features:
+    - market_sentiment
+    - macro_summary
+    - risk_narrative
+
+training:
+  total_timesteps: 1_000_000
+  eval_freq: 10_000
+  n_eval_episodes: 5
+  checkpoint_freq: 50_000
+  log_dir: logs/
+
+backtesting:
+  start_date: "2015-01-01"
+  end_date: "2024-12-31"
+  benchmark: "SPY"
+  metrics:
+    - sharpe_ratio
+    - sortino_ratio
+    - max_drawdown
+    - calmar_ratio
+    - annual_return
+
+risk:
+  max_position_size: 0.40     # max weight per asset
+  max_drawdown_limit: 0.20    # stop trading if portfolio drawdown exceeds this
+  risk_budget_per_agent: 0.33

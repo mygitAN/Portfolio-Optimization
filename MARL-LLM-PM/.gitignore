@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data
+data/raw/
+data/processed/
+*.csv
+*.parquet
+*.h5
+
+# Configs with secrets
+configs/local.yaml
+configs/secrets.yaml
+.env.local
+
+# Model checkpoints
+checkpoints/
+models/saved/
+*.pth
+*.pt
+*.ckpt
+
+# Logs
+logs/
+*.log
+runs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
